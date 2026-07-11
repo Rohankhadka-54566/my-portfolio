@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rohan Khadka — IT Support Professional</title>
+<style>
+  :root{
+    --navy: #14213D;
+    --navy-2: #1F3864;
+    --slate: #3A4A63;
+    --paper: #F3F1EC;
+    --paper-2: #FFFFFF;
+    --amber: #C98A2C;
+    --line: #D9D4C7;
+    --ink: #1B1B18;
+    --ink-soft: #5A5A54;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --display: 'Space Grotesk', 'Segoe UI', sans-serif;
+    --body: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: inherit; }
+
+  .statusbar{
+    background: var(--navy);
+    color: #EDEFF4;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .03em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 5vw;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .statusbar .dot{
+    display:inline-block; width:7px; height:7px; border-radius:50%;
+    background:#5CD68C; margin-right:7px; box-shadow: 0 0 0 3px rgba(92,214,140,0.18);
+  }
+
+  nav{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(243,241,236,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 5vw;
+    display:flex; justify-content: space-between; align-items:center;
+  }
+  nav .brand{
+    font-family: var(--display); font-weight:700; font-size:16px; letter-spacing: .01em;
+  }
+  nav ul{ list-style:none; display:flex; gap: 26px; }
+  nav a{
+    text-decoration:none; font-size: 13px; font-weight:500; color: var(--slate);
+    text-transform: uppercase; letter-spacing: .06em;
+  }
+  nav a:hover{ color: var(--navy); }
+  nav .resume-btn{
+    background: var(--navy); color:#fff; padding: 8px 16px; border-radius: 3px;
+    font-size: 13px; font-weight:600; text-transform: none; letter-spacing:0;
+  }
+  .nav-links{ display:flex; align-items:center; gap: 26px; }
+
+  header.hero{
+    padding: 90px 5vw 70px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 50px;
+    align-items: end;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow{
+    font-family: var(--mono); font-size: 12.5px; color: var(--amber);
+    letter-spacing: .08em; text-transform: uppercase; margin-bottom: 18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:''; width:24px; height:1px; background: var(--amber); }
+  h1{
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(40px, 6vw, 76px);
+    line-height: 1.02; letter-spacing: -0.01em;
+    color: var(--navy);
+  }
+  .hero-role{
+    font-family: var(--display); font-weight: 500; font-size: clamp(17px,2vw,22px);
+    color: var(--slate); margin-top: 14px;
+  }
+  .hero-sub{
+    max-width: 48ch; color: var(--ink-soft); margin-top: 22px; font-size: 15.5px;
+  }
+  .hero-cta{ display:flex; gap:14px; margin-top: 30px; flex-wrap: wrap; }
+  .btn{
+    font-family: var(--body); font-weight:600; font-size: 14px; padding: 12px 22px;
+    border-radius: 3px; text-decoration:none; display:inline-block; border:1px solid transparent;
+  }
+  .btn.primary{ background: var(--navy); color:#fff; }
+  .btn.primary:hover{ background: var(--navy-2); }
+  .btn.ghost{ border-color: var(--navy); color: var(--navy); }
+  .btn.ghost:hover{ background: var(--navy); color:#fff; }
+
+  .uptime-card{
+    background: var(--paper-2); border:1px solid var(--line); border-radius: 6px;
+    padding: 26px; font-family: var(--mono);
+  }
+  .uptime-card .card-title{
+    font-size: 11.5px; letter-spacing:.08em; text-transform:uppercase; color: var(--ink-soft);
+    display:flex; justify-content:space-between; margin-bottom:18px;
+  }
+  .metric-row{ display:flex; justify-content:space-between; padding: 9px 0; border-top: 1px dashed var(--line); font-size: 13.5px;}
+  .metric-row:first-of-type{ border-top:none; }
+  .metric-row .val{ color: var(--navy); font-weight:600; text-align:right; }
+  .bar{ height:5px; background:#E7E3D9; border-radius:3px; margin-top:6px; overflow:hidden; }
+  .bar span{ display:block; height:100%; background: var(--amber); }
+
+  section{ padding: 70px 5vw; max-width: 1180px; margin:0 auto; }
+  .section-head{ display:flex; align-items:baseline; gap:16px; margin-bottom: 34px; }
+  .section-num{ font-family: var(--mono); color: var(--amber); font-size: 13px; }
+  h2{
+    font-family: var(--display); font-weight:700; font-size: clamp(24px,3vw,32px);
+    color: var(--navy); text-transform: uppercase; letter-spacing: .01em;
+  }
+  .section-line{ flex:1; height:1px; background: var(--line); }
+
+  .summary-grid{ display:grid; grid-template-columns: 2fr 1fr; gap: 50px; }
+  .summary-grid p{ font-size: 16.5px; color: var(--ink); }
+  .summary-grid p + p{ margin-top: 14px; }
+  .fact-list{ font-family: var(--mono); font-size: 13px; color: var(--slate); }
+  .fact-list li{ list-style:none; display:flex; justify-content:space-between; gap: 10px; padding: 10px 0; border-bottom: 1px dashed var(--line); }
+  .fact-list li span:first-child{ color: var(--ink-soft); }
+  .fact-list li span:last-child{ text-align:right; }
+
+  .skills-cats{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .skill-cat{
+    background: var(--paper-2); border:1px solid var(--line); border-radius:6px; padding: 22px 24px;
+  }
+  .skill-cat h3{
+    font-family: var(--mono); font-size: 11.5px; text-transform:uppercase; letter-spacing:.07em;
+    color: var(--amber); margin-bottom: 12px;
+  }
+  .skill-cat ul{ list-style:none; }
+  .skill-cat li{
+    font-size: 14.5px; padding: 6px 0; border-top: 1px dashed var(--line); color: var(--ink);
+  }
+  .skill-cat li:first-of-type{ border-top:none; }
+
+  .ticket{
+    display:grid; grid-template-columns: 150px 1fr; gap: 26px;
+    padding: 28px 0; border-top: 1px solid var(--line);
+  }
+  .ticket:last-child{ border-bottom: 1px solid var(--line); }
+  .ticket-id{ font-family: var(--mono); font-size:12.5px; color: var(--amber); }
+  .ticket-dates{ font-family: var(--mono); font-size: 11.5px; color: var(--ink-soft); margin-top:6px; }
+  .ticket-status{
+    margin-top: 10px; font-family: var(--mono); font-size: 10.5px; letter-spacing:.05em;
+    display:inline-block; padding: 3px 8px; border-radius: 2px; text-transform: uppercase;
+  }
+  .ticket-status.resolved{ background:#E7F4EC; color:#2C7A47; }
+  .ticket-title{ font-family: var(--display); font-weight:600; font-size: 19px; color: var(--navy); }
+  .ticket-org{ font-size: 13.5px; color: var(--slate); margin-top:2px; }
+  .ticket-desc{ font-size: 14.5px; color: var(--ink-soft); margin-top:10px; max-width: 68ch; }
+  .ticket h4{
+    font-family: var(--mono); font-size: 11px; text-transform:uppercase; letter-spacing:.06em;
+    color: var(--ink-soft); margin-top: 18px; margin-bottom: 8px;
+  }
+  .ticket ul{ padding-left: 18px; color: var(--ink-soft); font-size: 14px; }
+  .ticket li{ margin-bottom: 5px; }
+
+  /* project card */
+  .project-card{
+    background: var(--paper-2); border:1px solid var(--line); border-radius: 8px; overflow:hidden;
+  }
+  .project-head{
+    background: var(--navy); color:#fff; padding: 24px 28px;
+    display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;
+  }
+  .project-head h3{ font-family: var(--display); font-size: 22px; font-weight:700; }
+  .project-head .yr{ font-family: var(--mono); font-size: 12px; color: var(--amber); }
+  .project-body{ padding: 28px; display:grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .project-body .col h4{
+    font-family: var(--mono); font-size: 11px; text-transform:uppercase; letter-spacing:.06em;
+    color: var(--amber); margin-bottom: 10px;
+  }
+  .project-body .col p, .project-body .col li{ font-size: 14.5px; color: var(--ink-soft); }
+  .project-body .col ul{ padding-left: 18px; }
+  .project-body .col li{ margin-bottom: 6px; }
+  .tool-pills{ display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+  .tool-pill{
+    font-family: var(--mono); font-size: 11.5px; background: var(--paper); border:1px solid var(--line);
+    padding: 4px 10px; border-radius: 3px; color: var(--navy);
+  }
+  .outcome-strip{
+    grid-column: 1 / -1; background: #EFF4EF; border:1px solid #D3E3D6; border-radius:5px;
+    padding: 16px 20px; font-size: 14.5px; color:#2C5A3A;
+  }
+  .outcome-strip b{ font-family: var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.05em; display:block; margin-bottom:4px; color:#2C7A47; }
+
+  .edu-grid{ display:grid; grid-template-columns: 1fr; gap: 20px; }
+  .edu-card{ background: var(--paper-2); border:1px solid var(--line); border-radius:5px; padding: 26px 28px; }
+  .edu-card h3{ font-family: var(--display); color: var(--navy); font-size: 18px; }
+  .edu-card .edu-meta{ font-size: 13.5px; color: var(--ink-soft); margin-top: 6px; font-family: var(--mono); }
+  .edu-card p.desc{ margin-top: 12px; font-size: 14.5px; color: var(--ink-soft); max-width: 70ch; }
+
+  footer{
+    background: var(--navy); color: #EDEFF4; padding: 70px 5vw 40px;
+  }
+  .contact-grid{
+    display:grid; grid-template-columns: 1.2fr 1fr; gap: 50px; max-width: 1180px; margin: 0 auto;
+  }
+  footer h2{ color:#fff; }
+  footer .section-line{ background: rgba(255,255,255,0.15); }
+  footer .section-num{ color: var(--amber); }
+  .contact-list{ list-style:none; margin-top: 22px; }
+  .contact-list li{
+    display:flex; gap:14px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.12);
+    font-size: 15px;
+  }
+  .contact-list li .k{ font-family: var(--mono); font-size:11px; color: var(--amber); width: 90px; text-transform:uppercase; letter-spacing:.05em; }
+  .contact-list a{ text-decoration:none; color:#fff; font-weight:500; }
+  .contact-list a:hover{ text-decoration:underline; }
+  .avail-card{
+    border: 1px solid rgba(255,255,255,0.18); border-radius:6px; padding: 26px;
+    font-family: var(--mono); font-size: 13px;
+  }
+  .avail-card .card-title{ font-size:11px; letter-spacing:.08em; text-transform:uppercase; color: rgba(255,255,255,0.6); margin-bottom:16px; }
+  .avail-card .status-line{ display:flex; align-items:center; gap:10px; font-size:14.5px; margin-bottom:14px; }
+  .avail-card .dot{ width:8px; height:8px; border-radius:50%; background:#5CD68C; }
+  .avail-card p{ color: rgba(255,255,255,0.75); line-height:1.6; }
+  .fine{
+    max-width:1180px; margin: 50px auto 0; padding-top: 24px; border-top:1px solid rgba(255,255,255,0.12);
+    font-family: var(--mono); font-size: 11.5px; color: rgba(255,255,255,0.45);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+
+  @media (max-width: 860px){
+    header.hero{ grid-template-columns: 1fr; }
+    .summary-grid, .contact-grid, .skills-cats{ grid-template-columns: 1fr; }
+    .ticket{ grid-template-columns: 1fr; }
+    .project-body{ grid-template-columns: 1fr; }
+    nav ul{ display:none; }
+  }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+  :focus-visible{ outline: 2px solid var(--amber); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+  <div class="statusbar">
+    <div><span class="dot"></span>SYSTEM STATUS: OPEN TO WORK — HOBART, TAS</div>
+    <div>rohankhadka65@gmail.com · 0410 870 538</div>
+  </div>
+
+  <nav>
+    <div class="brand">ROHAN&nbsp;KHADKA</div>
+    <div class="nav-links">
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#project">Project</a></li>
+        <li><a href="#education">Education</a></li>
+      </ul>
+      <a class="resume-btn" href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <div class="eyebrow">IT Support Professional</div>
+      <h1>Rohan<br>Khadka</h1>
+      <div class="hero-role">B.IT & Systems, 2025 · Help Desk & Technical Support · Hobart, TAS</div>
+      <p class="hero-sub">Bachelor of Information Technology and Systems graduate with hands-on experience from a 24-week IT internship — providing technical support, working in ticketing systems, and managing a complex data migration project end-to-end. Calm under pressure, detail-oriented, and comfortable following established procedures.</p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#contact">Get in touch</a>
+        <a class="btn ghost" href="#project">View project</a>
+      </div>
+    </div>
+
+    <div class="uptime-card">
+      <div class="card-title"><span>candidate_profile.log</span><span>v2026.07</span></div>
+      <div class="metric-row"><span>Location</span><span class="val">Warrane, TAS 7018</span></div>
+      <div class="metric-row"><span>Qualification</span><span class="val">B.IT & Systems, 2025</span></div>
+      <div class="metric-row"><span>Internship</span><span class="val">24 weeks, IT Support</span></div>
+      <div class="metric-row"><span>Shift availability</span><span class="val">Days / Nights / Weekends</span></div>
+      <div class="metric-row" style="border-top:none; padding-top:16px;">
+        <span style="width:100%;">
+          Reliability
+          <div class="bar"><span style="width:96%;"></span></div>
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <section id="summary">
+    <div class="section-head"><span class="section-num">01</span><h2>Summary</h2><div class="section-line"></div></div>
+    <div class="summary-grid">
+      <div>
+        <p>A Bachelor of Information Technology and Systems graduate with hands-on experience gained through a 24-week IT internship providing technical support, using ticketing systems, and managing a complex data migration project end-to-end.</p>
+        <p>Brings strong problem-solving, communication and documentation skills. Calm under pressure, detail-oriented, and comfortable following established procedures — fully available for rotating shifts including days, nights, weekends and public holidays.</p>
+      </div>
+      <ul class="fact-list">
+        <li><span>Degree</span><span>VIT, Melbourne — 2025</span></li>
+        <li><span>Internship</span><span>24 weeks, 2024</span></li>
+        <li><span>Focus</span><span>Help desk & tech support</span></li>
+        <li><span>Shifts</span><span>Fully flexible</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head"><span class="section-num">02</span><h2>Technical Skills</h2><div class="section-line"></div></div>
+    <div class="skills-cats">
+      <div class="skill-cat">
+        <h3>Operating Systems</h3>
+        <ul>
+          <li>Windows OS</li>
+          <li>Microsoft 365</li>
+          <li>Linux</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3>Systems &amp; Tools</h3>
+        <ul>
+          <li>Ticketing systems</li>
+          <li>Help desk software</li>
+          <li>Data entry systems</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3>Cloud Platforms</h3>
+        <ul>
+          <li>SharePoint</li>
+          <li>Box</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3>Core Competencies</h3>
+        <ul>
+          <li>Networking fundamentals</li>
+          <li>Systems administration</li>
+          <li>Technical troubleshooting</li>
+        </ul>
+      </div>
+      <div class="skill-cat" style="grid-column: 1 / -1;">
+        <h3>Documentation</h3>
+        <ul style="display:flex; gap:24px; flex-wrap:wrap;">
+          <li>Workflow documentation</li>
+          <li>Quality checks</li>
+          <li>Written &amp; verbal reporting</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-head"><span class="section-num">03</span><h2>Experience</h2><div class="section-line"></div></div>
+
+    <div class="ticket">
+      <div>
+        <div class="ticket-id">#INT-2024</div>
+        <div class="ticket-dates">2024 · 24 weeks</div>
+        <div class="ticket-status resolved">Completed</div>
+      </div>
+      <div>
+        <div class="ticket-title">IT Support Intern</div>
+        <div class="ticket-org">Victorian Institute of Technology — Melbourne, VIC</div>
+        <div class="ticket-desc">Provided technical support and assistance to users, resolving issues via direct communication and documentation, as part of a 24-week practical internship completed alongside degree requirements.</div>
+        <h4>Responsibilities</h4>
+        <ul>
+          <li>Used ticketing systems to accurately log requests and track resolutions</li>
+          <li>Led a full-scale data migration project end-to-end, following procedures and managing tasks under pressure</li>
+          <li>Communicated technical processes clearly to supervisors and stakeholders in written reports and verbal updates</li>
+          <li>Developed strong attention to detail through data validation, workflow documentation and quality checks</li>
+        </ul>
+        <h4>Achievements</h4>
+        <ul>
+          <li>Directly transferred ticketing and documentation skills into a resource suited to an operations help desk environment</li>
+          <li>Completed the internship's data migration project accurately and on schedule, from planning through to handover</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="project">
+    <div class="section-head"><span class="section-num">04</span><h2>Academic Project</h2><div class="section-line"></div></div>
+
+    <div class="project-card">
+      <div class="project-head">
+        <h3>Box to SharePoint Migration</h3>
+        <span class="yr">2024</span>
+      </div>
+      <div class="project-body">
+        <div class="col">
+          <h4>Objective</h4>
+          <p>Migrate all organisational data from Box to SharePoint with no data loss or disruption to users.</p>
+          <h4 style="margin-top:20px;">Tools</h4>
+          <div class="tool-pills">
+            <span class="tool-pill">SharePoint</span>
+            <span class="tool-pill">Box</span>
+            <span class="tool-pill">Microsoft 365</span>
+          </div>
+        </div>
+        <div class="col">
+          <h4>Duties</h4>
+          <ul>
+            <li>Managed all phases of a complex data migration: planning, auditing, execution, validation and handover documentation</li>
+            <li>Demonstrated calm, methodical problem-solving when troubleshooting cloud configuration and data transfer issues</li>
+            <li>Produced thorough procedural documentation to support handover</li>
+          </ul>
+        </div>
+        <div class="outcome-strip">
+          <b>Outcome</b>
+          Successfully completed the migration with accurate, well-documented handover materials — with no data loss or disruption to users.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-head"><span class="section-num">05</span><h2>Education</h2><div class="section-line"></div></div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <h3>Bachelor of Information Technology and Systems</h3>
+        <div class="edu-meta">Victorian Institute of Technology, Melbourne, VIC — Completed 2025</div>
+        <p class="desc">Coursework covering networking, systems administration, cloud platforms and technical support. Completed a 24-week practical internship as part of degree requirements.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="contact-grid">
+      <div>
+        <div class="section-head"><span class="section-num">06</span><h2>Contact</h2><div class="section-line"></div></div>
+        <ul class="contact-list">
+          <li><span class="k">Email</span><a href="mailto:rohankhadka65@gmail.com">rohankhadka65@gmail.com</a></li>
+          <li><span class="k">Phone</span><a href="tel:+61410870538">0410 870 538</a></li>
+          <li><span class="k">Address</span><span>1/28 Schouten Street, Warrane TAS 7018</span></li>
+        </ul>
+      </div>
+      <div class="avail-card">
+        <div class="card-title">Availability</div>
+        <div class="status-line"><span class="dot"></span>Fully available for rotating shifts</div>
+        <p>Available for days, nights, weekends and public holidays. Actively seeking Help Desk Operator and IT support roles across Tasmania.</p>
+      </div>
+    </div>
+    <div class="fine">
+      <span>© 2026 Rohan Khadka</span>
+      <span>Last updated July 2026</span>
+    </div>
+  </footer>
+
+</body>
+</html>
